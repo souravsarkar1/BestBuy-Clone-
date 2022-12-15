@@ -30,7 +30,9 @@ document.querySelector("form").addEventListener("submit",(e)=>{
         alert("This phone is already taken");
     }
     else{
+    signUpData.push(obj);
     localStorage.setItem("signUpLSData",JSON.stringify(signUpData));
+    window.location.assign("/day-4/otpOfNewAccount.html");
     }
 
 })
