@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/day-2/index.css">
+    <style>
+        .buyNow-container {
+            display: grid;
+            grid-gap: 10px;
+            margin: auto;
+            margin-left: 111px;
+            text-align: center;
+        }
+
+        .buyNow-container div {
+            border: 1px solid red;
+            height: 400px;
+            width: 325px;
+            box-shadow: rgba(33, 33, 147, 0.2) 0px 7px 29px 0px;
+            border-radius: 20px;
+            font-family: 'Roboto', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .buyNow-container div img {
+            width: 100px;
+            height: 150px;
+            margin: auto;
+            margin-left: 26px;
+        }
+
+        #payment-type {
+            /* border: 1px solid red; */
+            width: 333px;
+            height: 34px;
+            margin-left: 586px;
+            padding-left: 153px;
+            margin-top: 45px;
+            font-size: 30px;
+        }
+
+        
+
+        #diteals {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            gap: 10px;
+            margin-top: 35px;
+            margin-left: 650px;
+        }
+
+        #payment-option {
+            margin-top: -409px;
+            margin-left: 675px;
+        }
+     #payment-type ul li a{
+            color: rgb(93, 0, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <ul>
+            <li><a href="/day-2/index.html">BestBuy</a></li>
+            <li>MENU</li>
+            <li><input type="text" placeholder="search iteams here"></li>
+            <li>Aiea</li>
+            <li><a href="/day-4/cart.html">Cart</a></li>
+        </ul>
+    </div>
+    <div class="buyNow-container"></div>
+    <h1 id="payment-option">Choose Your Payment Option</h1>
+    <div id="payment-type">
+        <ul>
+            <li><a href="CashOnDelivery.html">Cash On Delivery</a></li>
+            <li><a href="OnlinePayment.html">Online Payment</a></li>
+        </ul>
+    </div>
+
+</body>
+<script>
+    let buyNowLsData = JSON.parse(localStorage.getItem("buyNow-LsData")) || [];
+    document.querySelector(".buyNow-container").innerHTML = "";
+    function diaplayData(buyNowLsData) {
+        for (let index = buyNowLsData.length - 1; index < buyNowLsData.length; index++) {
+
+            let div = document.createElement("div");
+
+            let img = document.createElement("img");
+            img.setAttribute("src", buyNowLsData[buyNowLsData.length - 1].img);
+
+
+            let title = document.createElement("h4");
+            title.innerText = buyNowLsData[buyNowLsData.length - 1].title;
+
+
+            let des = document.createElement("p");
+            des.innerText = buyNowLsData[buyNowLsData.length - 1].des;
+
+            let price = document.createElement("p");
+            price.innerText = buyNowLsData[buyNowLsData.length - 1].price;
+
+
+            let span = document.createElement("span");
+            span.innerText = 1;
+
+
+            let incrementBtn = document.createElement("button");
+            incrementBtn.innerText = "+";
+            let quantity = 1;
+            incrementBtn.addEventListener("click", () => {
+
+                span.innerText++;
+            })
+
+
+            let dicrementBtn = document.createElement("button");
+            dicrementBtn.innerText = "-";
+            dicrementBtn.addEventListener("click", () => {
+                if (span.innerHTML <= 1) {
+                    span.innerText = 1;
+                }
+                else {
+                    span.innerText--;
+                }
+            })
+            div.append(img, title, des, price, incrementBtn, span, dicrementBtn);
+
+            document.querySelector(".buyNow-container").append(div);
+        }
+
+    }
+
+    diaplayData(buyNowLsData);
+  
+
+
+</script>
+
+</html>

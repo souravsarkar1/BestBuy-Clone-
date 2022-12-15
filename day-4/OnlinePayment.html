@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/day-2/index.css">
+
+</head>
+
+<body>
+    <div class="nav">
+        <ul>
+            <li><a href="/day-2/index.html">BestBuy</a></li>
+            <li>MENU</li>
+            <li><input type="text" placeholder="search iteams here"></li>
+            <li>Aiea</li>
+            <li><a href="/day-4/cart.html">Cart</a></li>
+        </ul>
+    </div>
+    <div class="container">
+
+        <form action="">
+
+            <div class="row">
+
+                <div class="col">
+
+                    <h3 class="title">billing address</h3>
+
+                    <div class="inputBox">
+                        <span>full name :</span>
+                        <input type="text" placeholder="john deo" id="name">
+                    </div>
+                    <div class="inputBox">
+                        <span>email :</span>
+                        <input type="email" placeholder="example@example.com" id="email">
+                    </div>
+                    <div class="inputBox">
+                        <span>address :</span>
+                        <input type="text" placeholder="room - street - locality" id="address">
+                    </div>
+                    <div class="inputBox">
+                        <span>city :</span>
+                        <input type="text" placeholder="mumbai" id="city">
+                    </div>
+
+                    <div class="flex">
+                        <div class="inputBox">
+                            <span>state :</span>
+                            <input type="text" placeholder="india" id="state">
+                        </div>
+                        <div class="inputBox">
+                            <span>zip code :</span>
+                            <input type="text" placeholder="123 456" id="zip_code">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col">
+
+                    <h3 class="title">payment</h3>
+
+                    <div class="inputBox">
+                        <span>cards accepted :</span>
+                        <img src="card_img.png" alt="">
+                    </div>
+                    <div class="inputBox">
+                        <span>name on card :</span>
+                        <input type="text" placeholder="mr. john deo" id="name_on_card">
+                    </div>
+                    <div class="inputBox">
+                        <span>credit card number :</span>
+                        <input type="number" placeholder="1111-2222-3333-4444" id="credit_card_number">
+                    </div>
+                    <div class="inputBox">
+                        <span>exp month :</span>
+                        <input type="text" placeholder="1-12" id="exp_month">
+                    </div>
+
+                    <div class="flex">
+                        <div class="inputBox">
+                            <span>exp year :</span>
+                            <input type="number" placeholder="2022" id="exp_year">
+                        </div>
+                        <div class="inputBox">
+                            <span>CVV :</span>
+                            <input type="text" placeholder="1234" id="CVV">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <input type="submit" value="proceed to checkout" class="submit-btn">
+
+        </form>
+
+    </div>
+
+</body>
+<script>
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let address = document.getElementById("address").value;
+    let city = document.getElementById("city").value;
+    let state = document.getElementById("state").value;
+    let zip_code = document.getElementById("zip_code").value;
+    let name_on_card = document.getElementById("name_on_card").value;
+    let credit_card_number = document.getElementById("credit_card_number").value;
+    let exp_month = document.getElementById("exp_month").value;
+    let exp_year = document.getElementById("exp_year").value;
+    let CVV = document.getElementById("CVV").value;
+   
+    document.querySelector("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+       
+        let obj = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            address: document.getElementById("address").value,
+            city: document.getElementById("city").value,
+            state: document.getElementById("state").value,
+            zip_code: document.getElementById("zip_code").value,
+            name_on_card: document.getElementById("name_on_card").value,
+            credit_card_number: document.getElementById("credit_card_number").value,
+            exp_month: document.getElementById("exp_month").value,
+            exp_year: document.getElementById("exp_year").value,
+            CVV: document.getElementById("CVV").value,
+        }
+        //console.log(obj.credit_card_number);
+        let flagexp_month=false;
+        for(let i =1;i<=12;i++){
+            if(obj.exp_month==i){
+                flagexp_month=true;
+                break;
+            }
+        }
+        let flagexp_year=false;
+        for(let i =2020;i<=2030;i++){
+            if(obj.exp_year==i){
+                flagexp_year=true;
+                break;
+            }
+        }
+        if(obj.name==="" ||obj.email==="" ||obj.address==="" ||obj.city==="" ||obj.state==="" ||obj.zip_code==="" ||obj.name_on_card==="" ||obj.credit_card_number==="" ||obj.exp_month==="" ||obj.exp_year==="" ||obj.CVV===""){
+            alert("Wrong Input , Please fill all fields")
+        }else if(obj.address.split(" ").length<3){
+            alert("Enter Valid Address");
+        }
+        else if(obj.zip_code.length!=6){
+            alert("Wrong Zip Code")
+
+        }
+        else if(obj.credit_card_number.length!=16){
+            //console.log(obj.credit_card_number.length);
+            alert("Wrong Card Number")
+            
+        }
+        else if(flagexp_month===false){
+            alert("Wrong Exp Month");
+        }
+        else if(flagexp_year===false){
+            alert("Wrong Exp Year");
+        }
+        else if(obj.CVV.length!=4){
+            alert("Wrong cvv")
+
+        }
+        else{
+            console.log(obj);
+            window.location.assign("/day-4/otpForPatment.html");
+        }
+    })
+
+
+</script>
+
+</html>

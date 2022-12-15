@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .nav ul {
+            display: flex;
+            flex-direction: row;
+            list-style-type: none;
+            gap: 85px;
+            /* border: 1px solid red; */
+            justify-content: space-between;
+            font-size: 35px;
+            height: 71px;
+            padding-left: 7px;
+            padding-right: 7px;
+            background-color: rgb(21, 21, 201);
+            margin-top: 0px;
+            font-family: 'Roboto', sans-serif;
+
+        }
+
+
+        .nav ul li {
+            color: rgb(255, 255, 255);
+            padding-top: 12px;
+        }
+
+        .nav ul li:hover {
+            color: rgb(255, 255, 255);
+            padding-top: 12px;
+            text-decoration: underline;
+        }
+
+
+
+        .nav ul li input {
+            padding: 10px;
+            width: 433px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .nav ul li input:hover {
+            padding: 10px;
+            width: 433px;
+            border-radius: 10px;
+            border: none;
+            /* padding: auto; */
+
+
+        }
+        a {
+    color: white;
+    text-decoration: none;
+}
+
+        .CartContainer {
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: repeat(4, 1fr);
+            margin: auto;
+            margin-left: 11px;
+            text-align: center;
+        }
+
+        .CartContainer div {
+            border: 1px solid red;
+            height: 400px;
+            box-shadow: rgba(33, 33, 147, 0.2) 0px 7px 29px 0px;
+            border-radius: 20px;
+            font-family: 'Roboto', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .CartContainer div img {
+            width: 100px;
+            height: 150px;
+            margin: auto;
+            margin-left: 26px;
+        }
+
+        .CartContainer div button {
+            margin-bottom: 10px;
+            padding: 9px;
+            border-radius: 26px;
+        }
+
+        .CartContainer div button:hover {
+            background-color: rgb(67, 120, 182);
+        }
+
+        .productHeadinf {
+            margin-left: 567px;
+            margin-bottom: 44px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <ul>
+            <li><a href="/day-2/index.html">BestBuy</a></li>
+            <li>MENU</li>
+            <li><input type="text" placeholder="search iteams here"></li>
+            <li>Aiea</li>
+            <li><a href="/day-4/cart.html">Cart</a></li>
+        </ul>
+    </div>
+    <div class="CartContainer">
+
+    </div>
+</body>
+<script>
+    let ProductContainerLSData = JSON.parse(localStorage.getItem("ProductContainer-LSData")) || [];
+    if(ProductContainerLSData.length===0){
+        // let div = document.createElement("div");
+
+        // let h1 = document.createElement("h1");
+        // h1.innerText="No Cart Product";
+        // div.append(h1)
+        // console.log("ratna");
+        // document.querySelector(".CartContainer").append(div);
+        alert("No Cart Product")
+    }else{
+        DisplayProduct(ProductContainerLSData);
+    }
+    function DisplayProduct(ProductContainerLSData) {
+        document.querySelector(".CartContainer").innerHTML = "";
+        ProductContainerLSData.forEach((element, index) => {
+            let div = document.createElement("div");
+
+            let img = document.createElement("img");
+            img.setAttribute("src", element.img);
+
+
+            let title = document.createElement("h4");
+            title.innerText = element.title;
+
+
+            let des = document.createElement("p");
+            des.innerText = element.des;
+
+            let price = document.createElement("p");
+            price.innerText = element.price;
+
+            let btn = document.createElement("button");
+            btn.innerText = "Remove";
+            btn.addEventListener("click", () => {
+                ProductContainerLSData.splice(index, 1);
+                localStorage.setItem("ProductContainer-LSData", JSON.stringify(ProductContainerLSData));
+                DisplayProduct(ProductContainerLSData);
+            })
+            let buyNowLsData=JSON.parse(localStorage.getItem("buyNow-LsData"))||[];
+            let BuyBtn = document.createElement("button");
+            BuyBtn.innerText = "Buy Now";
+
+            BuyBtn.addEventListener("click",(e)=>{
+                e.preventDefault();
+                buyNowLsData.push(element);
+                localStorage.setItem("buyNow-LsData",JSON.stringify(buyNowLsData));
+                window.location.assign("/day-4/buyNow.html");
+            })
+            div.append(img, title, des, price, btn, BuyBtn);
+
+            document.querySelector(".CartContainer").append(div);
+        });
+    }
+    DisplayProduct(ProductContainerLSData);
+</script>
+
+</html>
