@@ -1,12 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>OTP Page</title>
+    <link rel="stylesheet" href="/day-2/index.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@500&family=Roboto:ital,wght@0,400;1,100&family=Ubuntu&display=swap');
+
+        /* font-family: 'Mulish', sans-serif;
+            font-family: 'Roboto', sans-serif;
+            font-family: 'Ubuntu', sans-serif; */
+        h1 {
+            margin-left: 228px;
+            font-family: 'Mulish', sans-serif;
+            font-family: 'Roboto', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        form input {
+            padding: 10px;
+            margin-left: 431px;
+            width: 312px;
+            border-radius: 10px;
+            margin-top: 22px;
+        }
+
+        form input:nth-child(3) {
+            margin-left: 512px;
+            width: 170px;
+        }
+
+        form input:nth-child(3):hover {
+            margin-left: 512px;
+            width: 170px;
+            background-color: rgb(33, 10, 243);
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div class="nav">
+        <ul>
+            <li><a href="/day-2/index.html">BestBuy</a></li>
+            <li>MENU</li>
+            <li><input type="text" placeholder="search iteams here"></li>
+            <li>Aiea</li>
+            <li><a href="/day-4/cart.html">Cart</a></li>
+        </ul>
+    </div>
+    <h1>Enter the OTP from your Registerd Mobile Number & Email Id</h1>
+    <form action="">
+        <input type="number" name="" id="otpMobileNumber" placeholder="Enter your Mobile Number OTP here">
+        <input type="number" name="" id="otpEmailId" placeholder="Enter your Email Id OTP here">
+        <input type="submit" value="Submit">
+    </form>
 </body>
+<script>
+    document.querySelector("form").addEventListener("submit",(e)=>{
+        e.preventDefault();
+        //console.log("ratna")
+        let x = document.getElementById("otpMobileNumber").value;
+        let y = document.getElementById("otpEmailId").value;
+        if(x === undefined || x ===null){
+            alert("Enter the OTP")
+        }
+        else if(x==1234 && y!=1234){
+            alert("Wrong Email OTP");
+        }
+        else if(x!=1234 && y==1234){
+            alert("Wrong Mobile Number OTP");
+        }
+        else if(x==1234 && y==1234){
+            alert("Account is Created Suceessfully");
+        }else{
+            alert("Wrong OTP")
+        }
+    })
+</script>
+
 </html>

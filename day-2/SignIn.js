@@ -14,7 +14,7 @@ let signUpData=JSON.parse(localStorage.getItem("signUpLSData")) || [];
         if(obj.name === ""|| obj.email === "" ||obj.password === "" || obj.phone === ""){
             alert("Wrong Input")
         }
-        else if(element.name === obj.name || element.email === obj.email ||element.password === obj.password || element.phone === obj.phone){
+        else if(element.name === obj.name && element.email === obj.email && element.password === obj.password && element.phone === obj.phone){
             alert("Login Successful");
         }
         else{
